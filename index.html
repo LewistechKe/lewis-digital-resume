@@ -67,19 +67,24 @@
         <section class="section--page">
           <h2>Certifications & Accomplishments</h2>
         
-          <div class="carousel-container">
+          <div class="carousel-certifications">
             <button class="carousel-btn prev">&#10094;</button>
-            <div class="carousel-track">
-              <div class="carousel-item"><img src="./assets/images/cert1.jpg" alt="Certification 1"></div>
-              <div class="carousel-item"><img src="./assets/images/cert2.jpg" alt="Certification 2"></div>
-              <div class="carousel-item"><img src="./assets/images/cert3.jpg" alt="Certification 3"></div>
-              <div class="carousel-item"><img src="./assets/images/cert4.jpg" alt="Certification 4"></div>
-              <div class="carousel-item"><img src="./assets/images/cert5.jpg" alt="Certification 5"></div>
-              <div class="carousel-item"><img src="./assets/images/cert6.jpg" alt="Certification 6"></div>
+        
+            <div class="carousel-track-wrapper">
+              <div class="carousel-track">
+                <div class="carousel-item"><img src="./assets/images/cert1.jpg" alt="Certification 1"></div>
+                <div class="carousel-item"><img src="./assets/images/cert2.jpg" alt="Certification 2"></div>
+                <div class="carousel-item"><img src="./assets/images/cert3.jpg" alt="Certification 3"></div>
+                <div class="carousel-item"><img src="./assets/images/cert4.jpg" alt="Certification 4"></div>
+                <div class="carousel-item"><img src="./assets/images/cert5.jpg" alt="Certification 5"></div>
+                <div class="carousel-item"><img src="./assets/images/cert6.jpg" alt="Certification 6"></div>
+              </div>
             </div>
+        
             <button class="carousel-btn next">&#10095;</button>
           </div>
         </section>
+
 
             
         <section id="work-history-wrapper" class="section--page" >
@@ -142,35 +147,56 @@
 
     </div>
         <script>
-  const carouselTrack = document.querySelector('.carousel-certifications .carousel-track');
-  const prevButton = document.querySelector('.carousel-certifications .carousel-btn.prev');
-  const nextButton = document.querySelector('.carousel-certifications .carousel-btn.next');
-  const items = document.querySelectorAll('.carousel-certifications .carousel-item');
+  const carousel = document.querySelector('.carousel-certifications');
+  const track = carousel.querySelector('.carousel-track');
+  const items = carousel.querySelectorAll('.carousel-item');
+  const prevBtn = carousel.querySelector('.carousel-btn.prev');
+  const nextBtn = carousel.querySelector('.carousel-btn.next');
 
   let index = 0;
   let itemWidth;
 
   function updateItemWidth() {
-    itemWidth = items[0].getBoundingClientRect().width + 16; // includes gap
+    itemWidth = items[0].getBoundingClientRect().width + 16; // 16px = gap
   }
-
-  updateItemWidth();
-  window.addEventListener('resize', updateItemWidth);
 
   function moveCarousel() {
-    carouselTrack.style.transform = `translateX(-${index * itemWidth}px)`;
+    track.style.transform = `translateX(-${index * itemWidth}px)`;
   }
 
-  nextButton.addEventListener('click', () => {
-    if (index < items.length - 3) index++;
+  function nextSlide() {
+    if (index < items.length - 3) {
+      index++;
+    } else {
+      index = 0;
+    }
     moveCarousel();
-  });
+  }
 
-  prevButton.addEventListener('click', () => {
-    if (index > 0) index--;
+  function prevSlide() {
+    if (index > 0) {
+      index--;
+    } else {
+      index = items.length - 3;
+    }
     moveCarousel();
-  });
+  }
+
+  // Navigation buttons
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
+
+  // Update size on resize
+  window.addEventListener('resize', updateItemWidth);
+  updateItemWidth();
+
+  // Autoplay setup
+  let autoScroll = setInterval(nextSlide, 4000);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+  carousel.addEventListener('mouseleave', () => (autoScroll = setInterval(nextSlide, 4000)));
 </script>
+
 </body>
     
 
