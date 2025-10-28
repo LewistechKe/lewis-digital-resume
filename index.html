@@ -143,4 +143,35 @@
     </div>
 
 </body>
+    <script>
+  const carouselTrack = document.querySelector('.carousel-certifications .carousel-track');
+  const prevButton = document.querySelector('.carousel-certifications .carousel-btn.prev');
+  const nextButton = document.querySelector('.carousel-certifications .carousel-btn.next');
+  const items = document.querySelectorAll('.carousel-certifications .carousel-item');
+
+  let index = 0;
+  let itemWidth;
+
+  function updateItemWidth() {
+    itemWidth = items[0].getBoundingClientRect().width + 16; // includes gap
+  }
+
+  updateItemWidth();
+  window.addEventListener('resize', updateItemWidth);
+
+  function moveCarousel() {
+    carouselTrack.style.transform = `translateX(-${index * itemWidth}px)`;
+  }
+
+  nextButton.addEventListener('click', () => {
+    if (index < items.length - 3) index++;
+    moveCarousel();
+  });
+
+  prevButton.addEventListener('click', () => {
+    if (index > 0) index--;
+    moveCarousel();
+  });
+</script>
+
 </html>
