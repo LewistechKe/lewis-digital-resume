@@ -173,4 +173,79 @@ li{
     }
 }
 
+/* ==== Certifications Carousel (Scoped Styles) ==== */
+.carousel-certifications {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 1em;
+  border: 1px solid var(--mainBorderColor);
+  border-radius: 10px;
+  padding: 0.5em;
+  background-color: var(--mainBgColor);
+}
+
+.carousel-certifications .carousel-track {
+  display: flex;
+  gap: 1em;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-certifications .carousel-item {
+  flex: 0 0 calc(33.333% - 1em); /* Show 3 at a time */
+  box-sizing: border-box;
+}
+
+.carousel-certifications .carousel-item img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--mainBorderColor);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carousel-certifications .carousel-item img:hover {
+  transform: scale(1.03);
+}
+
+/* Buttons */
+.carousel-certifications .carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--mainTextColor);
+  border: none;
+  font-size: 1.8rem;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 5;
+  transition: background 0.3s ease;
+}
+
+.carousel-certifications .carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-certifications .carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-certifications .carousel-btn.next {
+  right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .carousel-certifications .carousel-item {
+    flex: 0 0 calc(50% - 1em); /* Show 2 */
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-certifications .carousel-item {
+    flex: 0 0 100%; /* Show 1 */
+  }
+}
 
